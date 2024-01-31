@@ -1,5 +1,4 @@
 # Data Warehouse and Business Intelligence
 
-## Heading2
-### Heading3
+## This repository is contained the project of subject: DS525 in each weeks.
 
