@@ -19,3 +19,5 @@
 3. ติดตั้ง PostgreSQL และ Adminder จาก Docker $ docker compose up
 4. สร้างตารางไว้สำหรับเก็บข้อมูล ด้วยโค๊ด $ python create_tables.py
 5. Extract, Transform, และ Load ข้อมูลจากไฟล์ .json มาเก็บไว้ที่ตาราง ด้วยโค๊ด $ python etl.py
+
+## Data Model
