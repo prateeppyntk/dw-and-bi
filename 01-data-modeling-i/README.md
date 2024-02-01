@@ -1,11 +1,21 @@
 # Project Week1: Build a Data Modeling with Postgres(SQL)
 
-## ไฟล์ที่ใช้สำหรับโปรเจค
+
+## สิ่งที่ทำในโปรเจค
+1. ติดตั้ง PostgreSQL และ Adminder (UI สำหรับใช้งาน PostgreSQL บน Web Server) จาก Docker
+2. สร้างตารางไว้สำหรับจัดเก็บข้อมูลจากไฟล์ในโฟลเดอร์ data (5 ไฟล์)
+3. นำไฟล์ .json ในโฟลเดอร์ data มา Extract และจัดเก็บใส่ตารางที่สร้างไว้
+
+
+## ไฟล์ที่ใช้ในโปรเจค
 1. docker-compose.yml
 2. create_tables.py
 3. etl.py
 
-## สิ่งที่ทำในโปรเจค
-
 
 ## วิธีการใช้งานโค๊ด
+1. ตรวจสอบว่า path ใน Terminal อยู่ที่โฟลเดอร์ 01-data-modeling-i หรือไม่ ถ้าไม่ใช่ ให้รันโค๊ดนี้ $ cd 01-data-modeling-i ก่อนทำขั้นตอนถัดไป
+2. ติดตั้ง library ชื่อ psycopg2 ด้วยโค๊ด $ pip install psycopg2
+3. ติดตั้ง PostgreSQL และ Adminder จาก Docker $ docker compose up
+4. สร้างตารางไว้สำหรับเก็บข้อมูล
+5. Extract ข้อมูลจากไฟล์ .json มาเก็บไว้ที่ตาราง
