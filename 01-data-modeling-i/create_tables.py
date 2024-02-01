@@ -6,6 +6,7 @@ import psycopg2
 PostgresCursor = NewType("PostgresCursor", psycopg2.extensions.cursor)
 PostgresConn = NewType("PostgresConn", psycopg2.extensions.connection)
 
+table_drop_actions = "DROP TABLE IF EXISTS actions"
 table_drop_events = "DROP TABLE IF EXISTS events"
 table_drop_actors = "DROP TABLE IF EXISTS actors"
 
@@ -27,13 +28,25 @@ table_create_events = """
     )
 """
 
+table_create_actions = """
+    CREATE TABLE IF NOT EXISTS actions (
+        id serial,
+        action text,
+        event_id text,
+        PRIMARY KEY(id),
+        CONSTRAINT fk_action FOREIGN KEY(event_id) REFERENCES events(id)
+    )
+"""
+
 create_table_queries = [
     table_create_actors,
     table_create_events,
+    table_create_actions
 ]
 drop_table_queries = [
+    table_drop_actions,
     table_drop_events,
-    table_drop_actors,
+    table_drop_actors   
 ]
 
 

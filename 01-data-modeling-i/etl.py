@@ -31,19 +31,32 @@ def process(cur, conn, filepath):
         with open(datafile, "r") as f:
             data = json.loads(f.read())
             for each in data:
-                # Print some sample data
                 
-                if each["type"] == "IssueCommentEvent":
-                    print(
-                        each["id"], 
-                        each["type"],
-                        each["actor"]["id"],
-                        each["actor"]["login"],
-                        each["repo"]["id"],
-                        each["repo"]["name"],
-                        each["created_at"],
-                        each["payload"]["issue"]["url"],
-                    )
+                # Print some sample data
+                if "action" in each["payload"]:
+                    if each["type"] == "IssueCommentEvent":
+                        print(
+                            each["id"], 
+                            each["type"],
+                            each["actor"]["id"],
+                            each["actor"]["login"],
+                            each["repo"]["id"],
+                            each["repo"]["name"],
+                            each["created_at"],
+                            each["payload"]["issue"]["url"],
+                            each["payload"]["action"]
+                        )
+                    else:
+                        print(
+                            each["id"], 
+                            each["type"],
+                            each["actor"]["id"],
+                            each["actor"]["login"],
+                            each["repo"]["id"],
+                            each["repo"]["name"],
+                            each["created_at"],
+                            each["payload"]["action"]
+                        )
                 else:
                     print(
                         each["id"], 
@@ -52,7 +65,7 @@ def process(cur, conn, filepath):
                         each["actor"]["login"],
                         each["repo"]["id"],
                         each["repo"]["name"],
-                        each["created_at"],
+                        each["created_at"]
                     )
 
                 # Insert data into tables here
@@ -78,6 +91,29 @@ def process(cur, conn, filepath):
                 # print(insert_statement)
                 cur.execute(insert_statement)
 
+                # # Insert data into tables here
+                if "action" in each["payload"]: 
+                    insert_statement = f"""
+                    INSERT INTO actions (
+                        id,
+                        action,
+                        event_id
+                    ) VALUES (default, '{each["payload"]["action"]}', '{each["id"]}')
+                    ON CONFLICT (id) DO NOTHING
+                    """
+                else:
+                    insert_statement = f"""
+                    INSERT INTO actions (
+                        id,
+                        action,
+                        event_id
+                    ) VALUES (default, 'not_have', '{each["id"]}')
+                    ON CONFLICT (id) DO NOTHING
+                    """
+
+                # print(insert_statement)
+                cur.execute(insert_statement)
+                    
                 conn.commit()
 
 
