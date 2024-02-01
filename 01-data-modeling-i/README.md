@@ -11,7 +11,11 @@
 1. docker-compose.yml
 2. create_tables.py
 3. etl.py
-4. github_events_01.json - github_events_05.json (5 ไฟล์)
+4. github_events_01.json
+5. github_events_02.json
+6. github_events_03.json
+7. github_events_04.json
+8. github_events_05.json
 
 
 ## วิธีการใช้งานโค๊ด
