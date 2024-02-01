@@ -80,34 +80,24 @@ def process(cur, conn, filepath):
                 cur.execute(insert_statement)
 
                 # Insert data into tables here
-                insert_statement = f"""
+                if "action" in each["payload"]: 
+                    insert_statement = f"""
                     INSERT INTO events (
                         id,
                         type,
-                        actor_id
-                    ) VALUES ('{each["id"]}', '{each["type"]}', '{each["actor"]["id"]}')
-                    ON CONFLICT (id) DO NOTHING
-                """
-                # print(insert_statement)
-                cur.execute(insert_statement)
-
-                # # Insert data into tables here
-                if "action" in each["payload"]: 
-                    insert_statement = f"""
-                    INSERT INTO actions (
-                        id,
                         action,
-                        event_id
-                    ) VALUES (default, '{each["payload"]["action"]}', '{each["id"]}')
+                        actor_id
+                    ) VALUES ('{each["id"]}', '{each["type"]}', '{each["payload"]["action"]}', '{each["actor"]["id"]}')
                     ON CONFLICT (id) DO NOTHING
                     """
                 else:
                     insert_statement = f"""
-                    INSERT INTO actions (
+                    INSERT INTO events (
                         id,
+                        type,
                         action,
-                        event_id
-                    ) VALUES (default, 'not_have', '{each["id"]}')
+                        actor_id
+                    ) VALUES ('{each["id"]}', '{each["type"]}', 'not_have', '{each["actor"]["id"]}')
                     ON CONFLICT (id) DO NOTHING
                     """
 
