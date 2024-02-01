@@ -16,6 +16,7 @@ table_create_actors = """
         PRIMARY KEY(id)
     )
 """
+
 table_create_events = """
     CREATE TABLE IF NOT EXISTS events (
         id text,
