@@ -21,4 +21,4 @@
 5. Extract, Transform, และ Load ข้อมูลจากไฟล์ .json มาเก็บไว้ที่ตาราง ด้วยโค๊ด $ python etl.py
 
 ## Data Model
-![Data Model](https://github.com/prateeppyntk/dw-and-bi/assets/139861072/72eb8a0a-4013-4abb-aeda-8689312bccd0)
+![Data Model](https://github.com/prateeppyntk/dw-and-bi/assets/139861072/cfcbf742-4154-4716-91fb-6a29c6a112e8)
