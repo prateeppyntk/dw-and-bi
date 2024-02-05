@@ -9,4 +9,4 @@ services:
       - 9042:9042
 
 volumes:
-  cassandra-data-volume:
+   cassandra-data-volume:
