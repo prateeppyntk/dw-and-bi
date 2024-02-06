@@ -13,17 +13,18 @@ table_create = """
     (
         id text,
         login_name text,
-        organize text,
         type text,
+        organize text,
         create_date timestamp,
         public boolean,
-        PRIMARY KEY ((id), type, create_date)
+        PRIMARY KEY ((id, login_name), type)
     )
 """
 
 index_create = """
     CREATE INDEX ON events(type)
 """
+
 
 create_table_queries = [
     table_create,
@@ -91,13 +92,13 @@ def process(session, filepath):
                 if "org" in each:
                     insert_statement = f"""
                         INSERT INTO events (
-                        id,
-                        login_name,
-                        organize,
-                        type,
-                        create_date,
-                        public
-                    ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["org"]["id"]}', '{each["type"]}', '{each["created_at"]}', {each["public"]})
+                            id,
+                            login_name,
+                            type,
+                            organize,
+                            create_date,
+                            public
+                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', '{each["org"]["id"]}', '{each["created_at"]}', {each["public"]})
                     """
                     # print(insert_statement)
                     session.execute(insert_statement)
@@ -105,13 +106,13 @@ def process(session, filepath):
                 else:
                     insert_statement = f"""
                         INSERT INTO events (
-                        id,
-                        login_name,
-                        organize,
-                        type,
-                        create_date,
-                        public
-                    ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', 'personal', '{each["type"]}', '{each["created_at"]}', {each["public"]})
+                            id,
+                            login_name,
+                            type,
+                            organize,
+                            create_date,
+                            public
+                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', 'personal', '{each["created_at"]}', {each["public"]})
                     """
                     # print(insert_statement)
                     session.execute(insert_statement)
@@ -154,8 +155,9 @@ def main():
 
     # Select data in Cassandra and print them to stdout
     query = """
-    SELECT * from events
+        SELECT count(*) from events
     """
+
     rows = []
     try:
         rows = session.execute(query)
