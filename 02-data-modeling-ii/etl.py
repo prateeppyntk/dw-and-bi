@@ -17,20 +17,13 @@ table_create = """
         organize text,
         create_date timestamp,
         public boolean,
-        PRIMARY KEY ((id, login_name), type)
+        PRIMARY KEY ((id, type), create_date)
     )
+    WITH CLUSTERING ORDER BY (create_date DESC)
 """
-
-index_create = """
-    CREATE INDEX ON events(type)
-"""
-
 
 create_table_queries = [
     table_create,
-]
-index_create_queries = [
-    index_create,
 ]
 drop_table_queries = [
     table_drop,
@@ -44,16 +37,8 @@ def drop_tables(session):
             print(e)
 
 
-def index_creates(session):
-    for query in index_create_queries:
-        try:
-            session.execute(query)
-        except Exception as e:
-            print(e)
-
-
 def create_tables(session):
-    for query in create_table_queries:
+    for query in create_table_queries :
         try:
             session.execute(query)
         except Exception as e:
@@ -98,7 +83,7 @@ def process(session, filepath):
                             organize,
                             create_date,
                             public
-                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', '{each["org"]["id"]}', '{each["created_at"]}', {each["public"]})
+                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', '{each["org"]["id"]}','{each["created_at"]}', {each["public"]})
                     """
                     # print(insert_statement)
                     session.execute(insert_statement)
@@ -112,7 +97,7 @@ def process(session, filepath):
                             organize,
                             create_date,
                             public
-                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', 'personal', '{each["created_at"]}', {each["public"]})
+                        ) VALUES ('{each["id"]}', '{each["actor"]["login"]}', '{each["type"]}', 'personal','{each["created_at"]}', {each["public"]})
                     """
                     # print(insert_statement)
                     session.execute(insert_statement)
@@ -148,14 +133,13 @@ def main():
 
     drop_tables(session)
     create_tables(session)
-    index_creates(session)
 
     process(session, filepath="../data")
     #insert_sample_data(session)
 
     # Select data in Cassandra and print them to stdout
     query = """
-        SELECT count(*) from events
+        SELECT * FROM events where type = 'CreateEvent' ALLOW FILTERING
     """
 
     rows = []
