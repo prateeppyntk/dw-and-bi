@@ -1,4 +1,4 @@
-# Project Week1: Build a Data Modeling with Postgres(SQL)
+# Project Week1: Building a Data Modeling with Postgres(SQL)
 
 
 ## สิ่งที่ทำในโปรเจค
