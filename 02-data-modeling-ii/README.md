@@ -4,7 +4,7 @@
 We use docker for importing Apache Cassadra and create database which will use to collect data that we will extract them from json files in data's folder.
 
 ## Data Modeling
-In this project, We build 1 table and decide to extract id, login_name, type, organize, create_date, and public columns to store in the table and we also set id, type as Primary key and create_date as Cluster column. Moreover we sort data in create_date column by descending.
+In this project, We build 1 table and decide to extract id, login_name, type, organize, create_date, and public columns to store in the table and we also we also create_date as Cluster column and set ((id, type), creat_date) as Primary key. Moreover we sort data in create_date column by descending.
 ![Data Modeling](https://github.com/prateeppyntk/dw-and-bi/assets/139861072/0ddc7842-12c3-4a57-aae5-07661ba7bd6d)
 
 
