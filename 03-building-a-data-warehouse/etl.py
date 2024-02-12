@@ -21,14 +21,14 @@ create_table_queries = [
     """,
 ]
 
-# copy .json path from s3
 # copy IAM number at LabRole in IAM
-# copy JSON pattern from s3
+# copy path of github_events_01.json from s3
+# copy JSON of events_json_path.json from s3
 copy_table_queries = [
     """
-    COPY staging_events FROM 's3://pratee-swu-lab/github_events_01.json'
+    COPY staging_events FROM 's3://prateep-swu-lab/github_events_01.json'
     CREDENTIALS 'aws_iam_role=arn:aws:iam::590183982370:role/LabRole'
-    JSON 's3://pratee-swu-lab/events_json_path.json'
+    JSON 's3://prateep-swu-lab/events_json_path.json'
     REGION 'us-east-1'
     """,
 ]
@@ -71,9 +71,10 @@ def insert_tables(cur, conn):
         cur.execute(query)
         conn.commit()
 
-
+# change host (copy from endpoint)
+# change password
 def main():
-    host = "redshift-cluster-1.cwryxvpilhye.us-east-1.redshift.amazonaws.com"
+    host = "redshift-cluster-1.cbqke0dmnygn.us-east-1.redshift.amazonaws.com"
     dbname = "dev"
     user = "awsuser"
     password = "Pt0836249787"
