@@ -6,7 +6,7 @@
 ## Data Modeling
 In this project, We build 3 tables and extract 
 
-![data_model](03-building-a-data-warehouse/data_model.png)
+!03-building-a-data-warehouse/data_model.png
 
 
 ## File in the project
