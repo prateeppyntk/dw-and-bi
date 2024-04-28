@@ -1,7 +1,7 @@
 # Project Week3: Building an ETL Pipeline for a Cloud Data Warehouse (Google BigQuery)
 
 ## What we do in this project?
-- We will extract data from each json file, transform some of data into the new columns, and load transformed data into each table in Google BigQuery.
+We will extract data from each json file, transform some of data into the new columns, and load transformed data into each table in Google BigQuery.
 
 ## Data Modeling
 ![Data Modeling](data_model.png)

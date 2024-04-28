@@ -1,7 +1,7 @@
 # Project Week4: Building an ETL Pipeline to Transform Data in Data Lake (From Landing Zone to Cleaned Zone)
 
 ## What we do in this project?
-- We will extract and transform raw data in landing zone and loan into cleaned zone in data lake. In this project we use Google Cloud Storage (GCS) to be our data lake.
+We will extract and transform raw data in landing zone and loan into cleaned zone in data lake. In this project we use Google Cloud Storage (GCS) to be our data lake.
 
 ## What we do during ETL process?
 - To rename column name into lower case and replace space with underscrore(_).
