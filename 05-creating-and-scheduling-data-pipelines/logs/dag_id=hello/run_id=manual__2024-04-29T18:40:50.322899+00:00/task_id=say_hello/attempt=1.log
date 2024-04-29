@@ -1,0 +1,14 @@
+[2024-04-29T18:40:53.868+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: hello.say_hello manual__2024-04-29T18:40:50.322899+00:00 [queued]>
+[2024-04-29T18:40:53.876+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: hello.say_hello manual__2024-04-29T18:40:50.322899+00:00 [queued]>
+[2024-04-29T18:40:53.877+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 1
+[2024-04-29T18:40:53.900+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): say_hello> on 2024-04-29 18:40:50.322899+00:00
+[2024-04-29T18:40:53.909+0000] {standard_task_runner.py:60} INFO - Started process 36309 to run task
+[2024-04-29T18:40:53.916+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'hello', 'say_hello', 'manual__2024-04-29T18:40:50.322899+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/hello.py', '--cfg-path', '/tmp/tmpuplpmap5']
+[2024-04-29T18:40:53.918+0000] {standard_task_runner.py:88} INFO - Job 39: Subtask say_hello
+[2024-04-29T18:40:53.976+0000] {task_command.py:423} INFO - Running <TaskInstance: hello.say_hello manual__2024-04-29T18:40:50.322899+00:00 [running]> on host a1e48ef3e223
+[2024-04-29T18:40:54.076+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='hello' AIRFLOW_CTX_TASK_ID='say_hello' AIRFLOW_CTX_EXECUTION_DATE='2024-04-29T18:40:50.322899+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-04-29T18:40:50.322899+00:00'
+[2024-04-29T18:40:54.079+0000] {hello.py:13} INFO - hello
+[2024-04-29T18:40:54.080+0000] {python.py:202} INFO - Done. Returned value was: None
+[2024-04-29T18:40:54.089+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=hello, task_id=say_hello, execution_date=20240429T184050, start_date=20240429T184053, end_date=20240429T184054
+[2024-04-29T18:40:54.136+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-04-29T18:40:54.162+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
