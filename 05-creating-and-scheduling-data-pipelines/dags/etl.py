@@ -6,6 +6,7 @@ from typing import List
 from airflow import DAG
 from airflow.utils import timezone
 from airflow.operators.python import PythonOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
@@ -27,7 +28,7 @@ def _get_files(filepath: str) -> List[str]:
 
 
 def _create_tables():
-    hook = PostgresHook(postgres_conn_id="my_postgres")
+    hook = PostgresHook(postgres_conn_id="my_postgres_conn")
     conn = hook.get_conn()
     cur = conn.cursor()
 
@@ -38,6 +39,7 @@ def _create_tables():
             PRIMARY KEY(id)
         )
     """
+
     table_create_events = """
         CREATE TABLE IF NOT EXISTS events (
             id text,
@@ -47,17 +49,19 @@ def _create_tables():
             CONSTRAINT fk_actor FOREIGN KEY(actor_id) REFERENCES actors(id)
         )
     """
+
     create_table_queries = [
         table_create_actors,
         table_create_events,
     ]
+
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def _process(**context):
-    hook = PostgresHook(postgres_conn_id="my_postgres")
+    hook = PostgresHook(postgres_conn_id="my_postgres_conn")
     conn = hook.get_conn()
     cur = conn.cursor()
 
@@ -71,8 +75,8 @@ def _process(**context):
         with open(datafile, "r") as f:
             data = json.loads(f.read())
             for each in data:
-                # Print some sample data
                 
+                # Print some sample data
                 if each["type"] == "IssueCommentEvent":
                     print(
                         each["id"], 
@@ -83,6 +87,7 @@ def _process(**context):
                         each["repo"]["name"],
                         each["created_at"],
                         each["payload"]["issue"]["url"],
+                        each["payload"]["action"]
                     )
                 else:
                     print(
@@ -93,8 +98,9 @@ def _process(**context):
                         each["repo"]["id"],
                         each["repo"]["name"],
                         each["created_at"],
+                        each["payload"]["action"]
                     )
-
+                
                 # Insert data into tables here
                 insert_statement = f"""
                     INSERT INTO actors (
@@ -102,7 +108,7 @@ def _process(**context):
                         login
                     ) VALUES ({each["actor"]["id"]}, '{each["actor"]["login"]}')
                     ON CONFLICT (id) DO NOTHING
-                """
+                    """
                 # print(insert_statement)
                 cur.execute(insert_statement)
 
@@ -114,20 +120,23 @@ def _process(**context):
                         actor_id
                     ) VALUES ('{each["id"]}', '{each["type"]}', '{each["actor"]["id"]}')
                     ON CONFLICT (id) DO NOTHING
-                """
+                    """
+
                 # print(insert_statement)
                 cur.execute(insert_statement)
-
+                    
                 conn.commit()
 
 
 with DAG(
     "etl",
-    start_date=timezone.datetime(2022, 10, 15),
+    start_date=timezone.datetime(2024, 4, 30),
     schedule="@daily",
     tags=["workshop"],
     catchup=False,
-) as dag:
+) :
+
+    start = EmptyOperator(task_id = "start")
 
     get_files = PythonOperator(
         task_id="get_files",
@@ -147,5 +156,7 @@ with DAG(
         python_callable=_process,
     )
 
+    end = EmptyOperator(task_id = "end")
+
     # [get_files, create_tables] >> process
-    get_files >> create_tables >> process
+    start >> [get_files, create_tables] >> process >> end
