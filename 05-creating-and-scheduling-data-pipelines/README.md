@@ -21,10 +21,10 @@ In the pipeline, we did not indicate the dependency of get_files and create_tabl
 3. When finished installment, go to ports tab and open port:8080.
 4. Username and password = airflow (If you did not config with other value.)
 
-**To make sure before go through the next step**
+```**To make sure before go through the next step**
 1. Create connection of PostgreSQL in Airflow
 2. Config your conn name in etl.py
--- If you done, you can skip this step.--
+-- If you done, you can skip this step.--```
 
 5. Find DAG'name = etl
 6. Then, you can run this pipeline in Airflow
