@@ -87,7 +87,6 @@ def _process(**context):
                         each["repo"]["name"],
                         each["created_at"],
                         each["payload"]["issue"]["url"],
-                        each["payload"]["action"]
                     )
                 else:
                     print(
@@ -98,7 +97,6 @@ def _process(**context):
                         each["repo"]["id"],
                         each["repo"]["name"],
                         each["created_at"],
-                        each["payload"]["action"]
                     )
                 
                 # Insert data into tables here
