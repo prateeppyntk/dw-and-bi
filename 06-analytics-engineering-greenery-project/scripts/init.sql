@@ -64,10 +64,10 @@ CREATE TABLE events(
   product_id VARCHAR(256) REFERENCES products(product_id)
 );
 
-COPY addresses FROM '06-analytics-engineering-greenery-project/data/addresses.csv' DELIMITER ',' CSV HEADER;
-COPY users FROM '06-analytics-engineering-greenery-project/data/users.csv' DELIMITER ',' CSV HEADER;
-COPY promos FROM '06-analytics-engineering-greenery-project/data/promos.csv' DELIMITER ',' CSV HEADER;
-COPY products FROM '06-analytics-engineering-greenery-project/data/products.csv' DELIMITER ',' CSV HEADER;
-COPY orders FROM '06-analytics-engineering-greenery-project/data/orders.csv' DELIMITER ',' CSV HEADER;
-COPY order_items FROM '06-analytics-engineering-greenery-project/data/order_items.csv' DELIMITER ',' CSV HEADER;
-COPY events FROM '06-analytics-engineering-greenery-project/data/events.csv' DELIMITER ',' CSV HEADER;
+COPY addresses FROM '/data/addresses.csv' DELIMITER ',' CSV HEADER;
+COPY users FROM '/data/users.csv' DELIMITER ',' CSV HEADER;
+COPY promos FROM '/data/promos.csv' DELIMITER ',' CSV HEADER;
+COPY products FROM '/data/products.csv' DELIMITER ',' CSV HEADER;
+COPY orders FROM '/data/orders.csv' DELIMITER ',' CSV HEADER;
+COPY order_items FROM '/data/order_items.csv' DELIMITER ',' CSV HEADER;
+COPY events FROM '/data/events.csv' DELIMITER ',' CSV HEADER;
