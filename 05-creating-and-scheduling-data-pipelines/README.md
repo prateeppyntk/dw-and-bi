@@ -15,7 +15,7 @@ In the pipeline, we did not indicate the dependency of get_files and create_tabl
 ## Instruction
 1. Please check you path that Is is in "05-creating-and-scheduling-data-pipelines"? 
 -> If yes, please skip to the next step
--> Unless, Please run this code in terminal: $ cd 02-data-modeling-ii for chaging path first
+-> Unless, Please run this code in terminal: $ cd 05-creating-and-scheduling-data-pipelines for chaging path first
 2. Install Airflow:
    -> $ docker-compose up
 3. When finished installment, go to ports tab and open port:8080.

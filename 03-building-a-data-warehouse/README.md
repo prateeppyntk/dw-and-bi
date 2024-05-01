@@ -18,7 +18,7 @@ We will extract data from each json file, transform some of data into the new co
 ## Instruction
 1. Please check you path that Is is in "03-building-a-data-warehouse"? 
 -> If yes, please skip to the next step
--> Unless, Please run this code in terminal: $ cd 02-data-modeling-ii for chaging path first
+-> Unless, Please run this code in terminal: $ cd 03-building-a-data-warehouse for chaging path first
 2. Create environment:
    -> $ python -m vene ENV
    -> $ source ENV/bin/activate

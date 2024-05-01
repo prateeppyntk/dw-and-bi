@@ -25,7 +25,7 @@ We create data lake by having 2 zones which are landing zone and cleaned zone. W
 **Instruction for Codespaces**
 1. Please check you path that Is is in "04-building-a-data-lake"? 
 -> If yes, please skip to the next step
--> Unless, Please run this code in terminal: $ cd 02-data-modeling-ii for chaging path first
+-> Unless, Please run this code in terminal: $ cd 04-building-a-data-lake for chaging path first
 2. Install Pyspark in Jupyter notebook:
    -> $ docker-compose up
 3. When finished installment, go to ports tab and open port:8888.
